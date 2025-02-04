@@ -15,7 +15,7 @@ export default function NotFoundScreen() {
       </Text>
       <Button
         mode="contained"
-        // onPress={() => router.replace("/(root)/(auth)/login")}
+        onPress={() => router.replace("/(root)/(auth)/Login")}
         className="mt-6 bg-blue-600 dark:bg-blue-400"
       >
         Go Home
