@@ -8,6 +8,7 @@ import { AntDesign } from "@expo/vector-icons";
 import OAuth from "@/components/OAuth";
 import { useSignUp } from "@clerk/clerk-expo";
 import { ReactNativeModal } from "react-native-modal";
+import { fetchAPI } from "@/lib/fetch";
 
 const Signup = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -54,7 +55,16 @@ const Signup = () => {
       });
 
       if (signUpAttempt.status === "complete") {
-        // todo - connect to db
+        // connect to db
+        await fetchAPI("/(api)/user", {
+          method: "POST",
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            clerkId: signUpAttempt.createdUserId,
+          }),
+        })
+
         await setActive({ session: signUpAttempt.createdSessionId });
         setVerification({
           ...verification,
