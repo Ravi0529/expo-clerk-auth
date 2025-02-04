@@ -4,6 +4,7 @@ import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
 import InputField from "@/components/InputField";
 import { SafeAreaView } from "react-native-safe-area-context";
+import OAuth from "@/components/OAuth";
 
 const Signup = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -26,6 +27,9 @@ const Signup = () => {
   return (
     <SafeAreaView className="flex-1 bg-white justify-center">
       <View className="flex-1 bg-white">
+        <Text className="">
+          Create Your Account
+        </Text>
         <View className="p-5">
           <InputField
             label="Name"
@@ -56,13 +60,14 @@ const Signup = () => {
             className="bg-blue-600 text-white p-2"
           />
 
-          {/* <OAuth /> */}
+          <OAuth />
 
           <Link
             href="/Login"
             className="text-lg text-center text-gray-500 mt-10"
           >
-            Already have an account? <Text className="text-blue-400 font-semibold">Log In</Text>
+            Already have an account?{" "}
+            <Text className="text-blue-400 font-semibold">Log In</Text>
           </Link>
         </View>
         {/* <ReactNativeModal
