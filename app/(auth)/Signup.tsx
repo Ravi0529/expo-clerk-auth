@@ -42,7 +42,7 @@ const Signup = () => {
         state: "pending",
       });
     } catch (err: any) {
-      Alert.alert("Error: ", err.errors[0].longMessage)
+      Alert.alert("Error: ", err.errors[0].longMessage);
     }
   };
 
@@ -64,34 +64,37 @@ const Signup = () => {
             password: form.password,
             clerkId: signUpAttempt.createdUserId,
           }),
-        })
+        });
 
         await setActive({ session: signUpAttempt.createdSessionId });
         setVerification({
           ...verification,
           state: "success",
-        })
+        });
       } else {
         setVerification({
           ...verification,
           error: "Verification failed.",
           state: "failed",
-        })
+        });
       }
     } catch (err: any) {
       setVerification({
         ...verification,
         error: err.errors[0].longMessage,
         state: "failed",
-      })
+      });
     }
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white justify-center">
-      <View className="flex-1 bg-white">
-        <Text className="">Create Your Account</Text>
-        <View className="p-5">
+    <SafeAreaView className="flex-1 bg-white justify-center items-center px-6">
+      <View className="w-full max-w-md bg-white shadow-lg rounded-2xl p-6">
+        <Text className="text-3xl font-bold text-center text-gray-900 mb-6">
+          Create Your Account
+        </Text>
+
+        <View className="space-y-4">
           <InputField
             label="Name"
             placeholder="Enter name"
@@ -115,24 +118,23 @@ const Signup = () => {
               setForm({ ...form, password: value })
             }
           />
+
           <CustomButton
             title="Sign Up"
             onPress={onSignUpPress}
-            className="bg-blue-600 text-white p-2"
+            className="bg-blue-600 text-white shadow-md"
           />
 
           <OAuth />
 
-          <Link
-            href="/Login"
-            className="text-lg text-center text-gray-500 mt-10"
-          >
+          <Link href="/Login" className="text-center text-gray-500 mt-4">
             Already have an account?{" "}
-            <Text className="text-blue-400 font-semibold">Log In</Text>
+            <Text className="text-blue-600 font-semibold">Log In</Text>
           </Link>
         </View>
+      </View>
 
-        <ReactNativeModal
+      <ReactNativeModal
         isVisible={verification.state === "pending"}
         onBackdropPress={() =>
           setVerification({ ...verification, state: "default" })
@@ -143,53 +145,57 @@ const Signup = () => {
           }
         }}
       >
-        <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
-          <Text className="font-bold text-2xl mb-2">
+        <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px] items-center">
+          <Text className="font-bold text-2xl text-gray-900 mb-2">
             Verification
           </Text>
-          <Text className="font-Jakarta mb-5">
+          <Text className="text-gray-600 text-center mb-5">
             We've sent a verification code to {form.email}.
           </Text>
+
           <InputField
-            label={"Code"}
-            placeholder={"12345"}
+            label="Code"
+            placeholder="12345"
             value={verification.code}
             keyboardType="numeric"
-            onChangeText={(code: any) => setVerification({ ...verification, code })}
+            onChangeText={(code: any) =>
+              setVerification({ ...verification, code })
+            }
           />
           {verification.error && (
             <Text className="text-red-500 text-sm mt-1">
               {verification.error}
             </Text>
           )}
+
           <CustomButton
             title="Verify Email"
             onPress={onVerifyPress}
-            className="bg-green-500 text-white p-1"
+            className="bg-green-500 text-white text-lg p-2 rounded-full"
           />
         </View>
       </ReactNativeModal>
 
       <ReactNativeModal isVisible={showSuccessModal}>
-        <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
-        <AntDesign name="checkcircleo" size={50} color="green" />
-          <Text className="text-3xl font-bold text-center">
+        <View className="bg-white px-7 py-9 rounded-2xl min-h-[250px] items-center">
+          <AntDesign name="checkcircleo" size={50} color="green" />
+          <Text className="text-3xl font-bold text-gray-900 text-center mt-4">
             Verified
           </Text>
-          <Text className="text-base text-gray-400 text-center mt-2">
+          <Text className="text-base text-gray-500 text-center mt-2 mb-5">
             You have successfully verified your account.
           </Text>
+
           <CustomButton
             title="Browse Home"
             onPress={() => {
-              router.push(`/(root)/(tabs)/Home`)
+              router.push(`/(root)/(tabs)/Home`);
               setShowSuccessModal(false);
             }}
-            className="bg-blue-600 text-white p-1"
+            className="bg-blue-600 text-white text-lg p-2"
           />
         </View>
       </ReactNativeModal>
-      </View>
     </SafeAreaView>
   );
 };

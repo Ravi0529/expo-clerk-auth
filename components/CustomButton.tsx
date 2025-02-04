@@ -12,11 +12,11 @@ const CustomButton: React.FC<{
   return (
     <TouchableOpacity
       onPress={onPress}
-      className={`w-full rounded-full flex flex-row justify-center items-center shadow-sm shadow-neutral-400/70 p-3 ${className}`}
+      className={`w-full rounded-lg flex flex-row justify-center items-center shadow-md shadow-neutral-400/70 p-4 ${className}`}
       {...props}
     >
       {IconLeft && <IconLeft />}
-      <Text className={`text-lg font-bold ${className}`}>{title}</Text>
+      <Text className={`text-lg font-semibold text-white ${className}`}>{title}</Text>
       {IconRight && <IconRight />}
     </TouchableOpacity>
   );

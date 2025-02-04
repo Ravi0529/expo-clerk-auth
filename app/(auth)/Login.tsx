@@ -1,4 +1,4 @@
-import { View, Text, Alert } from "react-native";
+import { View, Text, Alert, TouchableOpacity } from "react-native";
 import React, { useCallback, useState } from "react";
 import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
@@ -38,10 +38,12 @@ const Signup = () => {
   }, [isLoaded, form]);
 
   return (
-    <SafeAreaView className="flex-1 bg-white justify-center">
-      <View className="flex-1 bg-white">
-        <Text className="">Login to Your Account</Text>
-        <View className="p-5">
+    <SafeAreaView className="flex-1 justify-center bg-white px-6 py-4">
+      <View className="w-full max-w-md bg-white shadow-lg rounded-2xl p-6">
+        <Text className="text-3xl font-bold text-center mb-6 text-gray-800">
+          Login to Your Account
+        </Text>
+        <View className="space-y-4">
           <InputField
             label="Email"
             placeholder="Enter email"
@@ -62,17 +64,14 @@ const Signup = () => {
           <CustomButton
             title="Login"
             onPress={onSignInPress}
-            className="bg-blue-600 text-white p-2"
+            className="bg-blue-600 text-white shadow-md"
           />
 
           <OAuth />
 
-          <Link
-            href="/Signup"
-            className="text-lg text-center text-gray-500 mt-10"
-          >
+          <Link href="/Signup" className="text-center text-gray-500 mt-4">
             Don't have an Account?{" "}
-            <Text className="text-blue-400 font-semibold">Sign Up</Text>
+            <Text className="text-blue-600 font-semibold">Sign Up</Text>
           </Link>
         </View>
       </View>
