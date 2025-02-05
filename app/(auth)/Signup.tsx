@@ -61,7 +61,6 @@ const Signup = () => {
           body: JSON.stringify({
             name: form.name,
             email: form.email,
-            password: form.password,
             clerkId: signUpAttempt.createdUserId,
           }),
         });

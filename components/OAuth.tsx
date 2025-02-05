@@ -1,10 +1,22 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { googleOAuth } from "@/lib/cache";
+import { useOAuth } from "@clerk/clerk-expo";
+import { router } from "expo-router";
 
 const OAuth = () => {
-  const handleGoogleSignIn = () => {
-    // code
+  const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
+
+  const handleGoogleSignIn = async () => {
+    const result = await googleOAuth(startOAuthFlow);
+
+    if (result.code === "session_exists") {
+      Alert.alert("Success", "Session exists. Redirecting to home screen.");
+      router.replace("/(root)/(tabs)/Home");
+    }
+
+    Alert.alert(result.success ? "Success" : "Error", result.message);
   };
 
   return (
