@@ -121,7 +121,7 @@ const Signup = () => {
           <CustomButton
             title="Sign Up"
             onPress={onSignUpPress}
-            className="bg-blue-600 text-white shadow-md"
+            className="bg-blue-600 text-white"
           />
 
           <OAuth />
